@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <strings.h>
 #include <string.h>
 
 /**
@@ -36,9 +37,9 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#define PUSH "push"
-#define PALL "pall"
 #define LINE_SIZE 1000
+#define PALL pall
+#define PUSH push
 
 stack_t *stack_build();
 instruction_t *implement_opcodes(char *opcode);
@@ -46,5 +47,6 @@ void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void push_stack(stack_t **stack, int n);
 int empty_stack(stack_t *stack);
+
 
 #endif

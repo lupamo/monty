@@ -1,8 +1,7 @@
 #include "monty.h"
-
 instruction_t op_commands[] = {
-	{ PUSH, push },
-	{ PALL, pall },
+	{ "push", push },
+	{ "pall", pall },
 };
 /**
  * implement_opcodes- reading monty files and implementing them
@@ -13,9 +12,10 @@ instruction_t *implement_opcodes(char *opcode)
 {
 	unsigned int i;
 
-	for (i = 0; i < sizeof(op_commands) / sizeof(op_commands[0]); ++i)
+	for (i = 0; i < sizeof(op_commands) / sizeof(op_commands[0]); i++)
 	{
-		if (strcmp(op_commands[i].opcode, opcode) == 0)
+		if (strncmp(op_commands[i].opcode, opcode,
+		strlen(op_commands[i].opcode)) == 0)
 		{
 			return (&op_commands[i]);
 		}
@@ -40,7 +40,10 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	n = atoi(val);
 
-	push_stack(stack, n);
+	if (n != 0)
+	{
+		push_stack(stack, n);
+	}
 }
 
 /**
