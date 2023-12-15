@@ -49,6 +49,7 @@ void push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		stack_t *node_new = malloc(sizeof(stack_t));
+
 		if (!node_new)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
@@ -88,31 +89,4 @@ void pall(stack_t **stack, unsigned int line_number)
 int empty_stack(stack_t *stack)
 {
 	return (stack == NULL);
-}
-/**
- * pint- prints a value on top
- * @stack: the stack to be checked
- * @line_number: number of the instruction in line
- * Return: nothing
-*/
-void pint(stack_t **stack, unsigned int line_number)
-{
-	if(empty_stack(*stack))
-	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	printf("%d\n", (*stack)->n);
-}
-/**
- * free_stack- frees a stack
- * @stack: a list of elements pushed
- * Return: nothing
-*/
-void free_stack(stack_t *stack)
-{
-	if (stack != NULL)
-	{
-		free(stack);
-	}
 }
