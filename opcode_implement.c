@@ -1,8 +1,5 @@
 #include "monty.h"
-instruction_t op_commands[] = {
-	{ "push", push },
-	{ "pall", pall },
-};
+
 /**
  * implement_opcodes- reading monty files and implementing them
  * @opcode: type of instruction
@@ -11,6 +8,10 @@ instruction_t op_commands[] = {
 instruction_t *implement_opcodes(char *opcode)
 {
 	unsigned int i;
+	static instruction_t op_commands[] = {
+		{ "push", push },
+		{ "pall", pall },
+	};
 
 	for (i = 0; i < sizeof(op_commands) / sizeof(op_commands[0]); i++)
 	{
@@ -76,8 +77,8 @@ int empty_stack(stack_t *stack)
 */
 void free_stack(stack_t *stack)
 {
-    if (stack != NULL)
-    {
-        free(stack);
-    }
+	if (stack != NULL)
+	{
+		free(stack);
+	}
 }
