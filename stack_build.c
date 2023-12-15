@@ -12,7 +12,6 @@ stack_t *stack_build()
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	stack->n = 0;
 	stack->prev = NULL;
 	stack->next = NULL;
 

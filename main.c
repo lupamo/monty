@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 
 	while (fgets(line, sizeof(line), open_file))
 	{
-		opcode = strtok(line, " ");
+		opcode = strtok(line, " \t\n");
 		if (!opcode)
 			continue;
 		op_commands = implement_opcodes(opcode);
@@ -43,5 +43,6 @@ int main(int argc, char *argv[])
 		op_commands->f(&stack, 1);
 	}
 	fclose(open_file);
+	free_stack(stack);
 	return (0);
 }

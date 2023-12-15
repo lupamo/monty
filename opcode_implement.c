@@ -40,10 +40,7 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	n = atoi(val);
 
-	if (n != 0)
-	{
-		push_stack(stack, n);
-	}
+	push_stack(stack, n);
 }
 
 /**
@@ -71,4 +68,16 @@ void pall(stack_t **stack, unsigned int line_number)
 int empty_stack(stack_t *stack)
 {
 	return (!stack);
+}
+/**
+ * free_stack- frees a stack
+ * @stack: a list of elements pushed
+ * Return: nothing
+*/
+void free_stack(stack_t *stack)
+{
+    if (stack != NULL)
+    {
+        free(stack);
+    }
 }
