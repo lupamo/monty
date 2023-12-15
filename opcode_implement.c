@@ -11,6 +11,7 @@ instruction_t *implement_opcodes(char *opcode)
 	static instruction_t op_commands[] = {
 		{ "push", push },
 		{ "pall", pall },
+		{ "pint", pint },
 	};
 
 	for (i = 0; i < sizeof(op_commands) / sizeof(op_commands[0]); i++)
@@ -31,7 +32,7 @@ instruction_t *implement_opcodes(char *opcode)
 */
 void push(stack_t **stack, unsigned int line_number)
 {
-	char *val = strtok(NULL, " ");
+	char *val = strtok(NULL, " \n\t");
 	int n;
 
 	if (!val)
@@ -41,7 +42,25 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	n = atoi(val);
 
-	push_stack(stack, n);
+	if (empty_stack(*stack))
+	{
+		(*stack)->n = n;
+	}
+	else
+	{
+		stack_t *node_new = malloc(sizeof(stack_t));
+		if (!node_new)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
+		node_new->n = n;
+		node_new->prev = NULL;
+		node_new->next = *stack;
+
+		(*stack)->prev = node_new;
+		*stack = node_new;
+	}
 }
 
 /**
@@ -68,7 +87,22 @@ void pall(stack_t **stack, unsigned int line_number)
 */
 int empty_stack(stack_t *stack)
 {
-	return (!stack);
+	return (stack == NULL);
+}
+/**
+ * pint- prints a value on top
+ * @stack: the stack to be checked
+ * @line_number: number of the instruction in line
+ * Return: nothing
+*/
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if(empty_stack(*stack))
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }
 /**
  * free_stack- frees a stack

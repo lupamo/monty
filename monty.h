@@ -40,14 +40,15 @@ typedef struct instruction_s
 #define LINE_SIZE 1000
 #define PALL pall
 #define PUSH push
+#define PINT pint
+
 
 stack_t *stack_build();
 instruction_t *implement_opcodes(char *opcode);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
-void push_stack(stack_t **stack, int n);
 int empty_stack(stack_t *stack);
 void free_stack(stack_t *stack);
-
+void pint(stack_t **stack, unsigned int line_number);
 
 #endif
